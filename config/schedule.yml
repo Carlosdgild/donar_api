@@ -1,0 +1,14 @@
+clear_expired_request_logs:
+  cron: "0 0 1 * *" # At 00:00 on day-of-month 1 -- Every month at 00:00
+  class: "CronJob::ClearExpiredRequestLogsJob"
+
+clear_expired_audit_logs:
+  cron: "0 0 1 * *" # At 00:00 on day-of-month 1 -- Every month at 00:00
+  class: "CronJob::ClearExpiredAuditLogsJob"
+
+# zyx_job:
+#   cron: "*/30 * * * *" # execute at every 30 minutes
+#   class: "ZyxJob"
+#   queue: mailers
+#   args:
+#     some_key: "stuff"

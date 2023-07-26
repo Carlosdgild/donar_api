@@ -1,0 +1,185 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/charges
+    body:
+      encoding: UTF-8
+      string: source=tok_visa&currency=usd&amount=1000&description=Brevity+is+the+soul+of+wit.
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/7.1.0
+      Authorization:
+      - Bearer sk_test_51NWi7nH5Isen5mELy52p2xHPQ9nRTtB7iWpWf0FvZ8VcgeDOD0JgEn0kxRgH9BoEmW6bkiesqtVUSObdUlHpEguJ00GH0wLOaP
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"7.1.0","lang":"ruby","lang_version":"3.0.3 p157 (2021-11-24)","platform":"x86_64-linux","engine":"ruby","publisher":"stripe","uname":"Linux
+        version 5.4.0-136-generic (buildd@lcy02-amd64-063) (gcc version 7.5.0 (Ubuntu
+        7.5.0-3ubuntu1~18.04)) #153~18.04.1-Ubuntu SMP Wed Nov 30 15:47:57 UTC 2022","hostname":"agildav-Legion-Y545-PG0"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 25 Jul 2023 04:36:11 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2951'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Idempotency-Key:
+      - 479802f4-31c2-40dc-9d27-e03d6340882e
+      Original-Request:
+      - req_M88kDGX8vNtvoM
+      Request-Id:
+      - req_M88kDGX8vNtvoM
+      Stripe-Should-Retry:
+      - 'false'
+      Stripe-Version:
+      - '2022-11-15'
+      X-Stripe-Routing-Context-Priority-Tier:
+      - api-testmode
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "ch_3NXcykH5Isen5mEL1KjzbCK4",
+          "object": "charge",
+          "amount": 1000,
+          "amount_captured": 1000,
+          "amount_refunded": 0,
+          "application": null,
+          "application_fee": null,
+          "application_fee_amount": null,
+          "balance_transaction": "txn_3NXcykH5Isen5mEL1IK0fysV",
+          "billing_details": {
+            "address": {
+              "city": null,
+              "country": null,
+              "line1": null,
+              "line2": null,
+              "postal_code": null,
+              "state": null
+            },
+            "email": null,
+            "name": null,
+            "phone": null
+          },
+          "calculated_statement_descriptor": "CARLOS GIL DAVILA",
+          "captured": true,
+          "created": 1690259770,
+          "currency": "usd",
+          "customer": null,
+          "description": "Brevity is the soul of wit.",
+          "destination": null,
+          "dispute": null,
+          "disputed": false,
+          "failure_balance_transaction": null,
+          "failure_code": null,
+          "failure_message": null,
+          "fraud_details": {},
+          "invoice": null,
+          "livemode": false,
+          "metadata": {},
+          "on_behalf_of": null,
+          "order": null,
+          "outcome": {
+            "network_status": "approved_by_network",
+            "reason": null,
+            "risk_level": "normal",
+            "risk_score": 2,
+            "seller_message": "Payment complete.",
+            "type": "authorized"
+          },
+          "paid": true,
+          "payment_intent": null,
+          "payment_method": "card_1NXcykH5Isen5mEL2bULP3bR",
+          "payment_method_details": {
+            "card": {
+              "brand": "visa",
+              "checks": {
+                "address_line1_check": null,
+                "address_postal_code_check": null,
+                "cvc_check": null
+              },
+              "country": "US",
+              "exp_month": 7,
+              "exp_year": 2024,
+              "fingerprint": "YwsutLm06mzp0qBs",
+              "funding": "credit",
+              "installments": null,
+              "last4": "4242",
+              "mandate": null,
+              "network": "visa",
+              "network_token": {
+                "used": false
+              },
+              "three_d_secure": null,
+              "wallet": null
+            },
+            "type": "card"
+          },
+          "receipt_email": null,
+          "receipt_number": null,
+          "receipt_url": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xTldpN25INUlzZW41bUVMKLui_aUGMgYIha0JZUk6LBa5GF1LaQmI7hhsWOyOJJf8ooP9x1LgEH_t2qLD4QTU4csDlebLli2_h79S",
+          "refunded": false,
+          "review": null,
+          "shipping": null,
+          "source": {
+            "id": "card_1NXcykH5Isen5mEL2bULP3bR",
+            "object": "card",
+            "address_city": null,
+            "address_country": null,
+            "address_line1": null,
+            "address_line1_check": null,
+            "address_line2": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_zip_check": null,
+            "brand": "Visa",
+            "country": "US",
+            "customer": null,
+            "cvc_check": null,
+            "dynamic_last4": null,
+            "exp_month": 7,
+            "exp_year": 2024,
+            "fingerprint": "YwsutLm06mzp0qBs",
+            "funding": "credit",
+            "last4": "4242",
+            "metadata": {},
+            "name": null,
+            "tokenization_method": null,
+            "wallet": null
+          },
+          "source_transfer": null,
+          "statement_descriptor": null,
+          "statement_descriptor_suffix": null,
+          "status": "succeeded",
+          "transfer_data": null,
+          "transfer_group": null
+        }
+  recorded_at: Tue, 25 Jul 2023 04:36:11 GMT
+recorded_with: VCR 6.0.0

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Thank you, very much: <%= @name %>!</p>
+    <p>
+    This are your donation details:<br>
+    --------------------------
+    </p>
+    <p>Status: <%= @status %></p>
+    <p>Amount: <%= @amount %></p>
+    <p>
+      Link where you can see your receipt:
+      <a href="<%= @receipt_url %>"><%= @receipt_url %></a>
+    </p>
+    <p>
+    Description:<br>
+    ----------
+    </p>
+    <p><%= @description %></p>
+  </body>
+</html>

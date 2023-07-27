@@ -24,6 +24,7 @@ class DonationsController < ApplicationController
 
   # It updates only the instructions due a donation cannot be updated nor the payment
   def update
+
     authorize @donation
     @donation.update(update_donation_params)
     json_response @donation
@@ -56,7 +57,7 @@ class DonationsController < ApplicationController
 
   # Finds a existing donation. Otherwise raises ActiveRecord::RecordNotFound
   def find_donation!
-    @donation = policy_scope(Donation).find params[:id]
+    @donation = Donation.find params[:id]
   end
 
   # Allowed parameters to update a Donation

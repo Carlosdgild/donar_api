@@ -1,13 +1,14 @@
 # frozen_string_literal: true
+
 class User < ApplicationRecord
-  #extend Devise::Models
+  # extend Devise::Models
   acts_as_paranoid
   # devise
   devise :database_authenticatable, :registerable, :recoverable, :trackable
   # associations
-  has_many :login_activities
-  has_many :donations
-  has_many :payments
+  has_many :login_activities, dependent: :nullify
+  has_many :donations, dependent: :nullify
+  has_many :payments, dependent: :nullify
   # validates
   validates :password, confirmation: true
 
@@ -39,7 +40,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
 
   def create_activity!(user_agent, address_ip)
-    self.login_activities.create!(
+    login_activities.create!(
       user_agent: user_agent,
       address_ip: address_ip
     )
@@ -48,5 +49,4 @@ class User < ApplicationRecord
   def full_name
     "#{name} #{last_name}"
   end
-
 end

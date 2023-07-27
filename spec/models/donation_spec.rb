@@ -5,11 +5,11 @@ require 'rails_helper'
 RSpec.describe Donation, type: :model do
   subject(:donation) { create(:donation) }
 
-  describe "validations" do
-    it { should validate_numericality_of(:amount).is_greater_than(0) }
+  describe 'validations' do
+    it { is_expected.to validate_numericality_of(:amount).is_greater_than(0) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it do
       expect(donation).to belong_to(:user)
       expect(donation).to belong_to(:login_activity)

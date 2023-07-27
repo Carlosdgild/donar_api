@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DonationSerializer < ActiveModel::Serializer
   attributes :id, :amount, :currency, :status, :instructions, :created_at, :deleted_at
 

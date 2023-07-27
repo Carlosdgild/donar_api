@@ -2,7 +2,8 @@
 
 #
 # Main Application Service class wrapper
-# Services should perform some kind of error handling and return the data (if any) with the boolean indicating if an error occurred
+# Services should perform some kind of error handling and return the data (if any) with the boolean
+# indicating if an error occurred
 # Services should use Forms, if needed
 #
 class ApplicationService

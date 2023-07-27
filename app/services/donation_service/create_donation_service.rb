@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DonationService
   #
   # Service that creates a donation and enquees a job to communicate with Stripe
@@ -7,7 +9,7 @@ module DonationService
     attr_reader :user, :user_agent, :address_ip
     attr_accessor :currency, :amount, :token, :description, :instructions
 
-    def initialize(current_user, user_agent = nil, address_ip = nil , args = {})
+    def initialize(current_user, user_agent = nil, address_ip = nil, args = {})
       @user = current_user
       @user_agent = user_agent
       @address_ip = address_ip
@@ -31,7 +33,7 @@ module DonationService
     # Transaction to create a new Donation
     def create_donation!
       ActiveRecord::Base.transaction do
-        activity = user.create_activity!(user_agent,address_ip)
+        activity = user.create_activity!(user_agent, address_ip)
         donation = Donation.create!(
           amount: amount,
           currency: currency,
@@ -44,8 +46,8 @@ module DonationService
         CreateChargeJob.perform_async(donation.id, token)
 
         donation
-      rescue => e
-        log_message("Transaction failed", "error")
+      rescue StandardError
+        log_message('Transaction failed', 'error')
         raise ActiveRecord::Rollback
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DonationPolicy < ApplicationPolicy
   def index?
     user.admin?

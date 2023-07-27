@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
@@ -37,7 +39,7 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
   # This line let us to use expect(...).to have_enqueued_job.on_queue('mailers')
-  #config.active_job.queue_adapter = :test
+  # config.active_job.queue_adapter = :test
 
   # config.action_mailer.delivery_method = :smtp
 

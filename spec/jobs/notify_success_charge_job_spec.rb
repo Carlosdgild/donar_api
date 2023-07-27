@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe NotifySuccessChargeJob, type: :job do
-  let!(:user) { create :user, email: 'carlosdgild@gmail.com'}
+  let!(:user) { create :user, email: 'carlosdgild@gmail.com' }
   let!(:donation) { create :donation, user: user }
 
-  it "enqueues a job" do
+  it 'enqueues a job' do
     expect do
-      NotifySuccessChargeJob.perform_async(donation)
-    end.to change(NotifySuccessChargeJob.jobs, :size).by(1)
+      described_class.perform_async(donation)
+    end.to change(described_class.jobs, :size).by(1)
   end
 
-  it "Performs a job and sends email" do
+  it 'Performs a job and sends email' do
     Sidekiq::Testing.inline! do
-      NotifySuccessChargeJob.perform_async(donation.id)
+      described_class.perform_async(donation.id)
       expect(ActionMailer::Base.deliveries.count).to eq(1)
       expect(ActionMailer::Base.deliveries.last.to).to include(donation.user.email)
     end

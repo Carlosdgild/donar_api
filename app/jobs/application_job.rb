@@ -13,6 +13,6 @@ class ApplicationJob
   # Main perform method to be overriden
   #
   def perform
-    raise "Not implemented"
+    raise 'Not implemented'
   end
 end

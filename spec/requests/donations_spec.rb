@@ -1,16 +1,21 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Donations", type: :request do
-  describe "GET /index" do
+RSpec.describe 'Donations', type: :request do
+  describe 'GET /index' do
     let!(:url) { donations_url }
-    let!(:time) { Time.now }
+    let!(:time) { Time.zone.now }
     let!(:user) { create :user, :admin }
-    let!(:donation) { create :donation, created_at: time}
-    let!(:donation_2) { create :donation, created_at: time }
-    let!(:future_date) { time.advance(days: 1) }
-    let!(:past_date) { time.advance(days: -1) }
 
-    context ' with authorized access' do
+    context 'with authorized access' do
+      let!(:future_date) { time.advance(days: 1) }
+      let!(:past_date) { time.advance(days: -1) }
+
+      before do
+        FactoryBot.create_list(:donation, 2, created_at: time)
+      end
+
       context 'without filters' do
         it 'retrieves all donations' do
           sign_in_as(user)
@@ -25,7 +30,7 @@ RSpec.describe "Donations", type: :request do
         it 'retrieves all donations from a date' do
           # Creating elegible record
           elegible_donation = create :donation, created_at: future_date
-          params = {start_date: future_date }
+          params = { start_date: future_date }
           sign_in_as(user)
           get url, params: params
           # Expectations
@@ -37,7 +42,7 @@ RSpec.describe "Donations", type: :request do
         it 'retrieves all donations from within dates' do
           # Creating unelegible record
           unelegible_donation = create :donation, created_at: future_date
-          params = {start_date: past_date, end_date: time }
+          params = { start_date: past_date, end_date: time }
           sign_in_as(user)
           get url, params: params
           # Expectations
@@ -72,15 +77,14 @@ RSpec.describe "Donations", type: :request do
     end
 
     context 'with unauthorized access' do
+      before { user.update(role: User::Role::USER) }
 
-      before { user.update(role: User::Role::USER)}
-
-      it 'forbid access' do
+      it 'returns unauthorized' do
         get url
         expect(response).to have_http_status(:unauthorized)
       end
 
-      it 'forbid access' do
+      it 'returns forbidden' do
         sign_in_as(user)
         get url
         expect(response).to have_http_status(:forbidden)
@@ -88,8 +92,8 @@ RSpec.describe "Donations", type: :request do
     end
   end
 
-  describe "POST /donations" do
-    let!(:user) { create :user, :admin}
+  describe 'POST /donations' do
+    let!(:user) { create :user, :admin }
     let!(:url) { donations_url }
     let(:valid_token) { 'tok_visa' }
     let(:params) do
@@ -103,7 +107,7 @@ RSpec.describe "Donations", type: :request do
     end
 
     context 'with authorized access' do
-      context 'creates a donation' do
+      context 'when creates a donation' do
         it 'creates donation and return ok status' do
           sign_in_as(user)
           expect do
@@ -116,8 +120,7 @@ RSpec.describe "Donations", type: :request do
         end
       end
 
-      context 'missing permit paramater' do
-
+      context 'when missing permit paramater' do
         before { params[:donation] = {} }
 
         it 'creates donation and return ok status' do
@@ -131,8 +134,8 @@ RSpec.describe "Donations", type: :request do
         end
       end
 
-      context 'missing or bad parameters' do
-        it 'creates donation and return ok status' do
+      context 'when ammount is bad parameter' do
+        it 'does not create donation and return bad_request' do
           params[:donation][:amount] = 'string'
           sign_in_as(user)
           expect do
@@ -144,8 +147,8 @@ RSpec.describe "Donations", type: :request do
         end
       end
 
-      context 'missing or bad parameters' do
-        it 'creates donation and return ok status' do
+      context 'when token is a parameter' do
+        it 'does not create donation and returns bad_request' do
           params[:donation][:token] = nil
           sign_in_as(user)
           expect do
@@ -159,8 +162,7 @@ RSpec.describe "Donations", type: :request do
     end
 
     context 'with unauthorized access' do
-
-      before { user.update(role: User::Role::USER)}
+      before { user.update(role: User::Role::USER) }
 
       it 'forbid access' do
         # needs to be logged
@@ -170,10 +172,10 @@ RSpec.describe "Donations", type: :request do
     end
   end
 
-  describe "PUT /donations" do
+  describe 'PUT /donations' do
     let!(:user) { create :user, :admin }
     let(:instructions) { 'instructions' }
-    let!(:donation) { create :donation, instructions: instructions}
+    let!(:donation) { create :donation, instructions: instructions }
     let!(:url) { donation_url(donation.id) }
     let(:params) do
       {
@@ -199,7 +201,7 @@ RSpec.describe "Donations", type: :request do
           put url, params: params
           # Expectations
           expect(response).to have_http_status(:bad_request)
-          expect(json['message']).to eq("Missing parameter donation")
+          expect(json['message']).to eq('Missing parameter donation')
         end
 
         it 'does not update amount' do
@@ -222,15 +224,14 @@ RSpec.describe "Donations", type: :request do
     end
 
     context 'with unauthorized access' do
+      before { user.update(role: User::Role::USER) }
 
-      before { user.update(role: User::Role::USER)}
-
-      it 'forbid access' do
+      it 'returns unauthorized' do
         put url
         expect(response).to have_http_status(:unauthorized)
       end
 
-      it 'forbid access' do
+      it 'returns forbidden' do
         sign_in_as(user)
         put url
         expect(response).to have_http_status(:forbidden)
@@ -238,10 +239,10 @@ RSpec.describe "Donations", type: :request do
     end
   end
 
-  describe "DELETE /donations" do
+  describe 'DELETE /donations' do
     let!(:user) { create :user, :admin }
     let(:instructions) { 'instructions' }
-    let!(:donation) { create :donation, instructions: instructions}
+    let!(:donation) { create :donation, instructions: instructions }
     let!(:url) { donation_url(donation.id) }
 
     context 'with authorized access' do
@@ -266,14 +267,14 @@ RSpec.describe "Donations", type: :request do
     end
 
     context 'with unauthorized access' do
-      before { user.update(role: User::Role::USER)}
+      before { user.update(role: User::Role::USER) }
 
-      it 'forbid access' do
+      it 'return unauthorized' do
         delete url
         expect(response).to have_http_status(:unauthorized)
       end
 
-      it 'forbid access' do
+      it 'returns forbidden' do
         sign_in_as(user)
         delete url
         expect(response).to have_http_status(:forbidden)

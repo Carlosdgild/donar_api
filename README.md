@@ -25,3 +25,7 @@ Donation API exercise.
     ```bash
     bundle exec sidekiq
     ```
+9. To run rubocop (linter):
+    ```bash
+    bundle exec rubocop -a
+    ```

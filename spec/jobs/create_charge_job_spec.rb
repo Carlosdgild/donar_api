@@ -3,23 +3,22 @@ require 'rails_helper'
 describe CreateChargeJob, type: :job do
   let!(:donation) { create :donation }
   let!(:valid_token) { 'tok_visa' }
-  it "enqueues a communication worker" do
+  it "enqueues a CreateChargeJob" do
     expect do
       CreateChargeJob.perform_async(donation, valid_token)
     end.to change(CreateChargeJob.jobs, :size).by(1)
   end
-#Net::SMTPAuthenticationError
-  it "enqueues a communication worker" do
-    # Set the Sidekiq testing mode to inline
+
+  it "performs a CreateChargeJob worker" do
     Sidekiq::Testing.inline! do
-      # Perform the action that enqueues CreateChargeJob
-      # For example:
+      expect_any_instance_of(CreateChargeJob)
+      .to receive(:update_models!)
+      .and_call_original
       VCR.use_cassette('stripe_card_payment',
         match_requests_on: [:stripe_api]) do
         CreateChargeJob.perform_async(donation.id, valid_token)
       end
 
-      # You can also assert the job count directly
       expect(Sidekiq::Worker.jobs.size).to eq(1)
 
       donation.reload

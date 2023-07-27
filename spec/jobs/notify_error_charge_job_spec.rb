@@ -11,14 +11,10 @@ describe NotifyErrorChargeJob, type: :job do
   end
 
   it "Performs a job and sends email" do
-    # Set the Sidekiq testing mode to inline
     Sidekiq::Testing.inline! do
-      # Perform the action that enqueues NotifyErrorChargeJob
       NotifyErrorChargeJob.perform_async(donation.id)
-
-
-      # You can also assert the job count directly
       expect(ActionMailer::Base.deliveries.count).to eq(1)
+      expect(ActionMailer::Base.deliveries.last.to).to include(donation.user.email)
     end
   end
 end

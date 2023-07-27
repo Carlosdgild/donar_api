@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :login_activities
   has_many :donations
   has_many :payments
+  # validates
+  validates :password, confirmation: true
 
   module SignupStatus
     CREATED = :created

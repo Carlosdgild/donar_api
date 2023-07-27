@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ErrorDonationMailer < ApplicationMailer
   def error_mail(donation)
     @payment = donation.payment
@@ -7,6 +9,6 @@ class ErrorDonationMailer < ApplicationMailer
     @status = donation.status
     @description = donation.description
 
-    mail(to: donation.user.email, subject: "Error in your donation")
+    mail(to: donation.user.email, subject: 'Error in your donation')
   end
 end

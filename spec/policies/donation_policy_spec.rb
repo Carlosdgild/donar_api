@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe DonationPolicy, type: :policy do
@@ -7,7 +9,7 @@ RSpec.describe DonationPolicy, type: :policy do
 
   context 'with validate authorizations for user object with admin role on
     Donation policies' do
-    #subject { described_class.new(user, donation) }
+    # subject { described_class.new(user, donation) }
     subject(:policy) { described_class.new(user, donation) }
 
     let!(:user) { create :user, :admin }
@@ -16,7 +18,7 @@ RSpec.describe DonationPolicy, type: :policy do
   end
 
   context 'without admin role on Donation policies' do
-    #subject { described_class.new(user, donation) }
+    # subject { described_class.new(user, donation) }
     subject(:policy) { described_class.new(user, donation) }
 
     let!(:user) { create :user }

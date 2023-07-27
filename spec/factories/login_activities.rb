@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :login_activity do
     user_agent { 'user_agent' }

@@ -1,9 +1,11 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe SuccessDonationMailer, type: :mailer do
   describe 'success_mail' do
-    let(:user) { create :user, email: 'carlosdgild@gmail.com'}
-    let(:donation) { create :donation, user: user}
+    let(:user) { create :user, email: 'carlosdgild@gmail.com' }
+    let(:donation) { create :donation, user: user }
 
     it 'sends successfull email in background job' do
       result = described_class.success_mail(donation).deliver_now

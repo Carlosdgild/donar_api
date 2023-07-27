@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DonationsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_donation!, only: %i[update destroy]
@@ -5,7 +7,8 @@ class DonationsController < ApplicationController
   # Endpoint to retrieve Donations
   def index
     authorize Donation
-    data, meta = paginate_resources policy_scope(Donation).filter_by_date(params[:start_date],params[:end_date])
+    data, meta = paginate_resources policy_scope(Donation).filter_by_date(params[:start_date],
+                                                                          params[:end_date])
     render json: data, meta: meta, adapter: :json
   end
 
@@ -13,10 +16,10 @@ class DonationsController < ApplicationController
   # It will always returns donation as pending. Worker will process it and change its status
   def create
     authorize Donation
-    donation = DonationService::CreateDonationService::perform(
+    donation = DonationService::CreateDonationService.perform(
       current_user,
       request.user_agent,
-      request.remote_ip ,
+      request.remote_ip,
       create_params
     )
     json_response donation, :created
@@ -24,7 +27,6 @@ class DonationsController < ApplicationController
 
   # It updates only the instructions due a donation cannot be updated nor the payment
   def update
-
     authorize @donation
     @donation.update(update_donation_params)
     json_response @donation

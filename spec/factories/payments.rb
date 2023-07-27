@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :payment do
     amount { Faker::Number.number(digits: 2) }
-    currency { "usd" }
+    currency { 'usd' }
     status { Payment::Status::PENDING }
     user
   end

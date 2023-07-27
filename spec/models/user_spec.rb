@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe User, type: :model do
   subject(:user) { create(:user) }
 
-  describe "validations" do
-    it '' do
+  describe 'validations' do
+    it 'validates attributes' do
       expect(user).to validate_presence_of(:name)
       expect(user).to validate_presence_of(:last_name)
       expect(user).to define_enum_for(:role).with_values(%i[user admin])
@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "associations" do
+  describe 'associations' do
     it do
       expect(user).to have_many(:donations)
       expect(user).to have_many(:payments)

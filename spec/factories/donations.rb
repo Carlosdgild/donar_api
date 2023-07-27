@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :donation do
     amount { 10 }
     description { Faker::Quotes::Shakespeare.hamlet_quote }
-    currency { "usd" }
+    currency { 'usd' }
     status { Donation::Status::PENDING }
     instructions { Faker::Quotes::Shakespeare.hamlet_quote }
     user

@@ -14,7 +14,8 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '19e780a389c72c15901f7772db011df18da229dac2b181ab3c00c2d754a9c0e290c59b1c9cf5b233de01519d306bbefc1ee6fc1f61a08b5c78942fa1ae6251b5'
+  # config.secret_key = '19e780a389c72c15901f7772db011df18da229dac2b181ab3c00c2d754a9c0'/
+  # 'e290c59b1c9cf5b233de01519d306bbefc1ee6fc1f61a08b5c78942fa1ae6251b5'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +127,8 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'c9b53456b0bff0db56f2529aef4d7c5589a7b3c74ceb1f17049c9a5e13b37f2e707acf85396ed97ee0b65acc9e68625a8f067499ae7a4d41fffdc3d3f6a49284'
+  # config.pepper = 'c9b53456b0bff0db56f2529aef4d7c5589a7b3c74ceb1f17049c9a5e13b37f2e707acf'\
+  # '85396ed97ee0b65acc9e68625a8f067499ae7a4d41fffdc3d3f6a49284'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -183,7 +185,7 @@ Devise.setup do |config|
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  config.email_regexp = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/
+  config.email_regexp = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
@@ -297,7 +299,8 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   # ==> Turbolinks configuration
-  # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
+  # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make
+  # redirection work correctly:
   #
   # ActiveSupport.on_load(:devise_failure_app) do
   #   include Turbolinks::Controller

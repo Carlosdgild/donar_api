@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SuccessDonationMailer < ApplicationMailer
   def success_mail(donation)
     @user = donation.user
@@ -8,6 +10,6 @@ class SuccessDonationMailer < ApplicationMailer
     @status = donation.status
     @description = donation.description
 
-    mail(to: donation.user.email, subject: "Thank you for your donation!")
+    mail(to: donation.user.email, subject: 'Thank you for your donation!')
   end
 end

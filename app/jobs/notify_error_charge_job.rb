@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotifyErrorChargeJob < ApplicationJob
   #
   # Job to send mail to user with error donation
